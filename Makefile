@@ -4,13 +4,15 @@ BIN     = $(MY_PATH)/bin
 HEAD    = $(MY_PATH)/head
 SRC     = $(MY_PATH)/src
 RES     = result
-PRO     = words_analyse.c
+PRO1    = deal_note.c
+PRO2    = externs_head_file.c
+PRO3    = get_file.c
 MAIN    = main.c
-
+PRO     = $(SRC)/$(PRO1) $(SRC)/$(PRO2) $(SRC)/$(PRO3)
 all : install
 
 install :
-	gcc $(SRC)/$(PRO) $(SRC)/$(MAIN) -o $(BIN)/$(RES) -I $(HEAD)
+	gcc $(PRO) $(SRC)/$(MAIN) -o $(BIN)/$(RES) -I $(HEAD)
 run :
 	@($(BIN)/$(RES))
 

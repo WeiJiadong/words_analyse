@@ -1,5 +1,11 @@
 #ifndef WORD_ANALYSE_H_INCLUDED
 #define WORD_ANALYSE_H_INCLUDED
+#include <stdio.h>
+#include <stdlib.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <string.h>
 
 /*状态码*/
 #define OK     (0)
