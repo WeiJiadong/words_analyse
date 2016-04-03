@@ -12,7 +12,7 @@
 int deal_note(char *str);
 /*获得文件内容*/
 char *get_file(char *file_name);
-
+int externs_head_file(char *str);
 
 
 #endif/*WORD_ANALYSE_H_INCLUDED*/

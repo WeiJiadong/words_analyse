@@ -33,15 +33,12 @@ int deal_note(char *str)
                     if (!str[begin] || !str[begin]) {
                         return NG;
                     }/*end if*/
+                    if ('\n' == str[begin + 2]) {
+                        begin++;
+                    }/*end if*/
                     for (end = begin + 2, begin = loop;str[begin++] = str[end++];);
                 }/*end if*/
             }/*end else*/
-        }/*end if*/
-
-        /*去除注释后的多余空行*/
-        for (begin = loop; !str[begin] && '\n' == str[begin]; ++begin);
-        if (begin != loop) {
-            for (end = begin, begin = loop; str[begin++] = str[end++];);
         }/*end if*/
 
     }/*end for*/
@@ -82,4 +79,45 @@ char *get_file(char *file_name)
     return res;
 }
 
-int externs_head_file()
+int externs_head_file(char *str)
+{
+    int loop  = 0;
+    int begin = 0;
+    int index = 0;
+    char *res = NULL;
+    char path[FILE_LEN] = {0};
+    char temp[FILE_LEN] = {0};
+
+    if (NULL == str) {
+        printf("文件名不能为空！");
+        return NG;
+    }/*end if*/
+
+    strcpy(path, "/usr/include/");
+
+    for (loop = 0; str[loop]; ++loop) {
+        if ('#' == str[loop]) {
+            if (!strncmp(str + loop + 1, "include", strlen("include"))) {
+                for (begin = loop + strlen("include") + 1; str[begin]
+                                          &&  str[begin] != '<'; ++begin);
+                if ('<' == str[begin]) {
+                    begin++;
+                }/*end if*/
+                for (index = 0; str[begin] && str[begin] != '>' && str[begin] != ' ';) {
+                    temp[index++] = str[begin++];
+                }/*end for*/
+                strcat(path, temp);
+                res = get_file(path);
+                if (!res) {
+                    perror("文件打开失败！");
+                    return NG;
+                }/*end if*/
+                printf ("%s :\n %s\n",temp, res);
+                memset(temp, 0x00, FILE_LEN);
+                strcpy(path, "/usr/include/");
+            }/*end if*/
+        }/*end if*/
+    }/*end for*/
+
+    return OK;
+}
