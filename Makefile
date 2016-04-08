@@ -7,8 +7,10 @@ RES     = result
 PRO1    = deal_note.c
 PRO2    = externs_head_file.c
 PRO3    = get_file.c
+PRO4    = ident_init.c
+PRO5    = is_ident.c
 MAIN    = main.c
-PRO     = $(SRC)/$(PRO1) $(SRC)/$(PRO2) $(SRC)/$(PRO3)
+PRO     = $(SRC)/$(PRO1) $(SRC)/$(PRO2) $(SRC)/$(PRO3) $(SRC)/$(PRO4) $(SRC)/$(PRO5)
 all : install
 
 install :

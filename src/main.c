@@ -20,9 +20,23 @@ int main(int argc, char *argv[])
     }/*end if*/
 
     res = deal_note(file_str);
+    if (NG == res) {
+        perror("删除注释失败！");
+        return NG;
+    }/*end if*/
 
-    if (OK == res) {
-        printf("%s\n", file_str);
+    printf("%s\n", file_str);
+
+    res = ident_init();
+    if (NG == res) {
+        perror("初始化失败！");
+        return NG;
+    }/*end if*/
+
+    res = is_ident(file_str);
+    if (NG == res) {
+        perror("关键字标示失败！");
+        return NG;
     }/*end if*/
 
     return OK;
